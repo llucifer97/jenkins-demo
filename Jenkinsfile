@@ -25,14 +25,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                script {
-                    background {
-                        sh 'java -jar target/jenkins-ready.jar'
-                    }
-                }
+                sh '(java -jar target/jenkins-ready.jar &)' // Example deployment command
             }
         }
-
     }
 
     post {
