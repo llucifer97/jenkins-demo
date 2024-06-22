@@ -1,10 +1,31 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_REPO = 'https://github.com/llucifer97/jenkins-demo' // Replace with your GitHub repository URL
+        MAVEN_HOME = tool 'Maven' // Assumes Maven tool is configured in Jenkins
+    }
+
     stages {
-        stage('Hello World') {
+        stage('Checkout') {
             steps {
-                echo 'Hello, World!'
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: "${GIT_REPO}"]]])
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    def mvnHome = tool name: 'Maven', type: 'maven'
+                    def mvnCmd = "${mvnHome}/bin/mvn" // Maven executable path
+                    sh "${mvnCmd} clean package" // Execute Maven clean and package phases
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh "java -jar target/jenkins-ready.jar &" // Example deployment command
             }
         }
     }
