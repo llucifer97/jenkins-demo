@@ -25,16 +25,9 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Deploy and start the application, capturing output and errors
-                script {
-                    def deployCmd = "java -jar target/jenkins-ready.jar > app.log 2>&1 &"
-                    sh deployCmd
-                    // Print the deployment command output for debugging
-                    sh 'tail -n 50 app.log' // Print last 50 lines of app.log for troubleshooting
-                }
+                sh "java -jar target/jenkins-ready.jar &" // Example deployment command
             }
         }
-
     }
 
     post {
