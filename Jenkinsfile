@@ -25,7 +25,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh "java -jar target/jenkins-ready.jar &" // Example deployment command
+                sh "nohup java -jar target/jenkins-ready.jar &" // Example deployment command
             }
         }
     }
