@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GIT_REPO = 'https://github.com/llucifer97/jenkins-demo' // Replace with your GitHub repository URL
-        M2_HOME = '/Applications/apache-maven-3.9.6'
+        MAVEN_HOME = tool 'M2_HOME' // Assumes Maven tool is configured in Jenkins
     }
 
     stages {
