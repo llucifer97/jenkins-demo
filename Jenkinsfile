@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def mvnHome = tool name: 'Maven', type: 'maven'
+                    def mvnHome = tool name: 'M2_HOME', type: 'maven'
                     def mvnCmd = "${mvnHome}/bin/mvn" // Maven executable path
                     sh "${mvnCmd} clean package" // Execute Maven clean and package phases
                 }
